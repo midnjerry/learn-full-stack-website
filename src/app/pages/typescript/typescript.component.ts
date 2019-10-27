@@ -7,6 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TypescriptComponent implements OnInit {
 
+javaExample = `@Data
+@Entity
+public class Person {
+  @Id
+  private Long id;
+  private String firstName;
+  private String lastName;
+}`
+
+  
   constructor() { }
 
   ngOnInit() {

@@ -1,0 +1,17 @@
+.error404 {
+    width: 100%;
+    text-align: center;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+/* Circle around image */
+.error404-img {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 10rem;
+    object-fit: fill;
+    -webkit-box-shadow: inset 7px 7px 54px 16px rgba(0,0,0,1);
+    -moz-box-shadow: inset 7px 7px 54px 16px rgba(0,0,0,1);
+    box-shadow: inset 7px 7px 54px 16px rgba(0,0,0,1);
+}
+  

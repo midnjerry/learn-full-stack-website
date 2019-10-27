@@ -1,0 +1,78 @@
+<h1>Angular Component</h1>
+<p>Components should be treated as mini-programs or widgets that can be generally used for a specific functionality.
+    Imagine these components as
+    custom "HTML tags" that you create for yourself or for your team.</p>
+
+<p>For example, let's make a CodeBlock component that will allow us to format code into a more readable format using
+    colorized text to highlight keywords. Let's make a
+    &lt;codeblock&gt; tag that we can use to surround our target code.
+</p>
+<p>
+    For example, if we write this as html</p>
+<p>
+    &lt;codeblock language="language-html"&gt;<br>
+    {{htmlCode1}}<br>
+    &lt;/codeblock&gt;
+</p>
+
+<p>we should display this:</p>
+
+<codeblock language="language-html">{{htmlCode1}}</codeblock>
+
+<p>
+    This would be great! Now, as we create more and more content, we can always reuse this &lt;codeblock&gt; tag to
+    highlight code! Angular allows us to granularize our
+    functionality into small components that we can share and reuse.
+</p>
+
+<h2>Quick Notes</h2>
+<p>Every component has the following files when generated:</p>
+<uL>
+    <li>.ts file</li>
+    <ul>
+        <li>The "brain" of the component</li>
+        <li>This is the Typescript class that holds programmatic detail of the component.</li>
+        <li>Constructor is called from here</li>
+        <li>Angular lifecycle event handlers (methods) can be implemented here</li>
+        <li></li>
+    </ul>
+    <li>.spec.ts file</li>
+    <ul>
+        <li>Test file for unit and integration testing</li>
+    </ul>
+    <li>.html file</li>
+    <ul>
+        <li>The HTML for the component view is housed here.</li>
+    </ul>
+    <li>.css file</li>
+    <ul>
+        <li>Placeholder stylesheet to customize the component</li>
+    </ul>
+</uL>
+
+<h2>@Component decorator (aka annotation)</h2>
+<ul>
+    <li><span class="title">selector:</span> The name of your "custom tag".</li>
+    <ul>
+        <li>Ex. A component with "selector: app-navbar" can be referenced in html with: &lt;app-navbar&gt;</li>
+    </ul>
+    <li><span class="title">templateUrl:</span> Html file used for component display.</li>
+    <li><span class="title">styleUrls:</span> Stylesheets to use for component. Angular encapsulates the stylesheet so
+        they are not treated globally.</li>
+</ul>
+
+<uL>
+    <li>Use the @Input() decorator to accept parameters within the first tag.</li>
+    <ul>
+        <li>In the example above, that's the "language" attribute.</li>
+    </ul>
+    <li>Use the @Input() decorator to accept parameters within the first tag.</li>
+    <li></li>
+</uL>
+
+Output:
+<div class="output-box">
+    <div>
+        <p>Hello World</p>
+    </div>
+</div>

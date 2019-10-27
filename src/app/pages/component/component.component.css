@@ -1,0 +1,8 @@
+.output-box {
+    border-color:rgb(8, 102, 190);
+    border-style:solid;
+}
+
+span.title {
+    font-weight: bold;
+}
