@@ -11,18 +11,28 @@ import { CodeblockComponent } from './components/codeblock/codeblock.component';
 import { ComponentComponent } from './pages/component/component.component';
 import { QuoteblockComponent } from './components/quoteblock/quoteblock.component';
 import { ArticleComponent } from './components/article/article.component';
+import { ResolverComponent } from './pages/resolver/resolver.component';
+import { ObservablesComponent } from './pages/observables/observables.component';
+import { DemoResolver } from './services/demo-resolver';
 
 const appRoutes: Routes = [
-  { path: '',
-  redirectTo: 'home',
-  pathMatch: 'full'
-},
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
   { path: 'home', component: HomeComponent },
   { path: 'typescript', component: TypescriptComponent },
-  { path: 'router', component: RouterComponent},
-  { path: 'component', component: ComponentComponent},
+  { path: 'router', component: RouterComponent },
+  { path: 'component', component: ComponentComponent },
+  {
+    path: 'resolver',
+    component: ResolverComponent,
+    resolve: { persons: DemoResolver }
+  },
+  { path: 'observables', component: ObservablesComponent },
   { path: '**', component: PageNotFoundComponent }
-];  
+];
 
 @NgModule({
   declarations: [
@@ -35,7 +45,9 @@ const appRoutes: Routes = [
     CodeblockComponent,
     ComponentComponent,
     QuoteblockComponent,
-    ArticleComponent
+    ArticleComponent,
+    ResolverComponent,
+    ObservablesComponent
   ],
   imports: [
     BrowserModule,

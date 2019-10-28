@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PrismService } from './prism.service';
+import { DemoResolverService } from './demo-resolver';
 
-describe('PrismService', () => {
+describe('DemoResolverService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PrismService = TestBed.get(PrismService);
+    const service: DemoResolverService = TestBed.get(DemoResolverService);
     expect(service).toBeTruthy();
   });
 });

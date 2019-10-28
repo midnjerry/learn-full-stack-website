@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BeautifyCodeService } from './beautify-code.service';
+import { MockBackendService } from './mock-backend.service';
 
-describe('BeautifyCodeService', () => {
+describe('MockBackendService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: BeautifyCodeService = TestBed.get(BeautifyCodeService);
+    const service: MockBackendService = TestBed.get(MockBackendService);
     expect(service).toBeTruthy();
   });
 });
