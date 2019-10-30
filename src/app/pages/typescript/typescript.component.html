@@ -1,13 +1,17 @@
 <h1>What is Typescript?</h1>
-<p>
-  Here is an example of Typescript using the Prism JS plugin
-</p>
-<pre>
-<code class="language-ts">console.log("Hello World");</code>
-</pre>
 
-<codeblock language="language-ts" title="Hello World">console.log("Hello World");</codeblock>
+<h2>Map</h2>
+<p>Map is a new data structure introduced in ES6. It allows you store key-value pairs.</p>
 
-<codeblock language="language-java" title = "Java Example">{{javaExample}}</codeblock>
+<codeblock language="language-ts" title="Map Creation">let map = new Map();</codeblock>
 
-<codeblock language="language-java">{{javaExample}}</codeblock>
+<h3>Add / Get / Delete Entries</h3>
+<ul>
+  <li>map.set(key, value)</li>
+  <li>map.get(key) - returns value at given key or null</li>
+  <li>map.has(key) - returns true if map contains key</li>
+  <li>map.delete(key) - deletes key,value pair from map</li>
+  <li>map.size - returns number of key/value pairs in map</li>
+  <li>map.clear() - clears all entries</li>
+</ul>
+<codeblock language="language-ts" title="Map Usages">{{exampleCode}}</codeblock>

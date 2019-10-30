@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { TypescriptComponent } from './pages/typescript/typescript.component';
@@ -14,6 +15,8 @@ import { ArticleComponent } from './components/article/article.component';
 import { ResolverComponent } from './pages/resolver/resolver.component';
 import { ObservablesComponent } from './pages/observables/observables.component';
 import { DemoResolver } from './services/demo-resolver';
+import { EarthquakeComponent } from './pages/earthquake/earthquake.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 const appRoutes: Routes = [
   {
@@ -31,6 +34,7 @@ const appRoutes: Routes = [
     resolve: { persons: DemoResolver }
   },
   { path: 'observables', component: ObservablesComponent },
+  { path: 'earthquake', component: EarthquakeComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -47,11 +51,14 @@ const appRoutes: Routes = [
     QuoteblockComponent,
     ArticleComponent,
     ResolverComponent,
-    ObservablesComponent
+    ObservablesComponent,
+    EarthquakeComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    LeafletModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

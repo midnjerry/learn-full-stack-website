@@ -1,4 +1,20 @@
-<h1>Calling backend</h1>
+<h1>Observables</h1>
+
+<p>Observables can be considered streams of data.  They only stream data if there is an <span class="b">Observer</span>.  Once an observer is assigned aka
+    <span class="b">subscribed</span>, then the Observable starts pushing data by calling Observer.next(data);
+</p>
+
+<p>To bind an Observer with an Observable you call the Observable's subscribe(...) method and pass in the observer as a parameter.  When the Observable gets new data,
+    it will push that value to the Observer by calling it's .next(data) method.  One aspect of Observables that can be considered confusing is this .next method.
+    Observables are usually utilized as follows:
+</p>
+
+<codeblock language="language-js">{{codeSample0}}</codeblock>
+
+<p>Observables are powerful because they can represent almost anything as a stream.  You can set a keyboard observable.  You can set an observable to an Http call.  To a database.  You can use it to represent anything that emits data.</p>
+
+<h2>{{keyPressed}}</h2>
+
 <p>{{message}}</p>
 
 <ul>
@@ -6,3 +22,18 @@
         {{person.id}} {{person.firstName}} {{person.lastName}} {{person.age}}
     </li>
 </ul>
+
+<codeblock language="language-js" title="Create Observable with time-delayed responses">{{codeSample1}}</codeblock>
+
+
+<codeblock language="language-js" title="Create Observer to watch">{{codeSample2}}</codeblock>
+<h2>Output:</h2>
+{{observer1Text}}
+
+<codeblock language="language-js" title="Create Observer to watch">{{codeSample3}}</codeblock>
+<h2>Output:</h2>
+{{observer2Text}}
+
+<codeblock language="language-js" title="Observer watches after 1 sec">{{codeSample4}}</codeblock>
+<h2>Output:</h2>
+{{observer3Text}}

@@ -7,33 +7,14 @@ import { MockBackendService } from 'src/app/services/mock-backend.service';
 @Injectable({
   providedIn: 'root'
 })
-export class DemoResolver implements Resolve<Person[]>{
-  resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): Person[] | Observable<Person[]> | Promise<Person[]> {
-    let responseArray:Observable<Person>[] = [];
-    for (let i = 0; i < 4; i++) {
+export class DemoResolver implements Resolve<Observable<Person[]>>{
+  resolve(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot): Observable<Person[]> | Observable<Observable<Person[]>> | Promise<Observable<Person[]>> {
+    let responseArray: Observable<Person>[] = [];
+    for (let i = 1; i < 4; i++) {
       responseArray.push(this.backend.getPerson(i));
     }
-
-    let persons$ = forkJoin(responseArray);
-    
-    let result:Person[] = [];
-
-    persons$.subscribe((persons:Person[]) => {
-      for (let person of persons){
-        if (person){
-          result.push(person);
-        }
-      }
-      return result;
-    })
-
-    return result;
+    return (forkJoin(responseArray));
   }
 
-  constructor(private backend: MockBackendService) {  };
-
-
-  
-
-
+  constructor(private backend: MockBackendService) { };
 }

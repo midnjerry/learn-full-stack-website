@@ -7,19 +7,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TypescriptComponent implements OnInit {
 
-javaExample = `@Data
-@Entity
-public class Person {
-  @Id
-  private Long id;
-  private String firstName;
-  private String lastName;
-}`
+  exampleCode = `let nameAgeMapping = new Map();
+ 
+//Set entries
+nameAgeMapping.set("Lokesh", 37);
+nameAgeMapping.set("Raj", 35);
+nameAgeMapping.set("John", 40);
+ 
+//Get entries
+nameAgeMapping.get("John");     //40
+ 
+//Check entry is present or not
+nameAgeMapping.has("Lokesh");       //true
+nameAgeMapping.has("Brian");        //false
+nameAgeMapping.has(37);             //false
+ 
+//Size of Map with 
+nameAgeMapping.size;                //3
+ 
+//Delete an entry
+nameAgeMapping.delete("Lokesh");    // true
+ 
+//Clear whole Map
+nameAgeMapping.clear();             //Clear all entries`
 
-  
+
   constructor() { }
 
   ngOnInit() {
+    let nameAgeMapping = new Map();
+
+    //Set entries
+    nameAgeMapping.set("Lokesh", 37);
+    nameAgeMapping.set("Raj", 35);
+    nameAgeMapping.set("John", 40);
+
+    //Get entries
+    nameAgeMapping.get("John");     //40
+
+    //Check entry is present or not
+    nameAgeMapping.has("Lokesh");       //true
+    nameAgeMapping.has("Brian");        //false
+    nameAgeMapping.has(37);             //false
+
+    //Size of Map with 
+    nameAgeMapping.size;                //3 - note no parenthesis!
+
+    //Delete an entry
+    nameAgeMapping.delete("Lokesh");    // true
+
+    //Clear whole Map
+    nameAgeMapping.clear();             //Clear all entries
   }
 
 }

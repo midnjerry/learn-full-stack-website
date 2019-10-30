@@ -1,7 +1,17 @@
 .title {
     margin: 0px;
+    background-color: rgb(241, 241, 241);
+    border: 1px solid #D1D1E8;
+    padding: 0.5rem 1rem;
+    border-bottom: none;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    color: #2d2d2d;
+    font-weight: bold;
 }
 
-codeblock {
+
+
+.code {
     margin: 0px;
 }
