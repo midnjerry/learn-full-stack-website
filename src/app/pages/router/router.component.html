@@ -1,3 +1,267 @@
-<p>
-  router works!
-</p>
+<h1>Router Testing Examples</h1>
+<p>Thanks to: <a href="https://gist.github.com/daniel-beet/f44657d1fd3aa50d432080aa7cd7d128">Daniel Beet</a></p>
+
+<h2>Summary</h2>
+<ol>
+  <li>You have to use async tests, either with async() or faskAsync() test helpers.</li>
+  <li>fakeAsync() results in cleaner looking tests, use it if you can.</li>
+  <li>If using async(), then ensure you have unbroken chains of Promises, returning fixture.whenStable()
+    from .then() blocks.
+  </li>
+  <li>
+    If using fakeAsync() then ensure you call tick() and fixture.detectChanges() after each async action.
+  </li>
+</ol>
+
+<!-- The example files are a feature component that can be dropped into an Angular
+CLI application (or created by `ng generate`).
+
+### TIP: Use Yarn
+By default, the [Angular CLI](https://github.com/angular/angular-cli), `ng`,
+will install node_modules when the application is created using `ng new`. It
+will use `npm` to do the install, if you prefer to use
+[Yarn](https://yarnpkg.com/) then use `ng set --global packageManager=yarn` to
+make `ng` install with the alternative package manager client.
+
+### Example of `ng` commands used to create the feature module
+```
+ng new test-sandbox -it -is --routing
+cd test-sandbox
+ng generate module my
+ng generate component my/my-thing
+```
+
+### Create the component tests
+
+1. Create a module to facilitate testing routed components (this will not appear in
+   the compiled application, as we will only reference it from test .spec.ts
+   files) (`src/test.module.ts`)
+   
+```typescript
+import { Component, NgModule } from '@angular/core';
+
+import { RouterModule } from '@angular/router';
+
+@Component({
+    template: `<router-outlet></router-outlet>`
+})
+export class TestRoutingComponent { }
+
+@Component({
+    template: ''
+})
+export class TestComponent { }
+
+@NgModule({
+    imports: [
+        RouterModule
+    ],
+    declarations: [
+        TestComponent,
+        TestRoutingComponent
+    ]
+})
+export class TestModule { }
+```
+
+2. Add the feature module (`src/app/my/my.module.ts`)
+```typescript
+import { CommonModule } from '@angular/common';
+import { MyRoutingModule } from './my-routing.module';
+import { MyThingComponent } from './my-thing/my-thing.component';
+import { NgModule } from '@angular/core';
+
+@NgModule({
+    imports: [
+        CommonModule,
+        MyRoutingModule
+    ],
+    declarations: [MyThingComponent]
+})
+export class MyModule { }
+```
+
+3. Add a routing module for the feature module (`src/app/my/my-routing.module.ts`)
+```typescript
+import { RouterModule, Routes } from '@angular/router';
+
+import { MyThingComponent } from './my-thing/my-thing.component';
+import { NgModule } from '@angular/core';
+
+const ROUTES: Routes = [
+    { path: '', component: MyThingComponent },
+    { path: 'other', component: MyThingComponent },
+    { path: 'elsewhere/:id', component: MyThingComponent }
+];
+
+@NgModule({
+    imports: [RouterModule.forChild(ROUTES)],
+    exports: [RouterModule],
+    providers: []
+})
+export class MyRoutingModule {
+}
+```
+
+4. Add the component we want to test (`src/app/my/my-thing.component.ts`)
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'app-my-thing',
+    template: `<button [routerLink]="['other']">Click me!</button>`,
+    styles: [``]
+})
+export class MyThingComponent {
+    constructor() { }
+}
+```
+
+5. Add the feature module to the root app routing module routes, e.g.:
+```typescript
+export const ROUTES: Routes = [
+    { path: 'my', loadChildren: 'app/my/my.module#MyModule', },
+    { path: '**', redirectTo: '/my', pathMatch: 'full' },
+];
+```
+
+6. Add the component test file (`src/app/my/my-thing.component.spec.ts`)
+```typescript
+// Test interactions with templates and router navigation.
+
+import { ComponentFixture, TestBed, async, fakeAsync, inject, tick } from '@angular/core/testing';
+import { MockLocationStrategy, SpyLocation } from '@angular/common/testing';
+import { TestComponent, TestModule, TestRoutingComponent } from '../../../test-module';
+
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+import { Location } from '@angular/common';
+import { MyThingComponent } from './my-thing.component';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+
+describe('MyComponent', () => {
+    let component: TestRoutingComponent;
+    let fixture: ComponentFixture<TestRoutingComponent>;
+    let rendered: DebugElement;
+
+    // The configuration of the testing module is asynchronous 
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                MyThingComponent
+            ],
+            imports: [
+                TestModule,
+                RouterTestingModule.withRoutes([
+                    { path: 'path/to/module', component: MyThingComponent },
+                    { path: 'path/to/module/other', component: TestComponent },
+                    { path: 'path/to/module/elsewhere/:id', component: MyThingComponent }
+                ])
+            ],
+            providers: [
+                // { provide: MyThingService, useValue: mockMyThingService }
+            ]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestRoutingComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        rendered = fixture.debugElement;
+    });
+
+    // test using fakeAsync() and tick() to load the initial component
+    it('should create', fakeAsync(
+        inject([Router], (router: Router) => {
+            router.navigateByUrl('/path/to/module');
+            advance(); // use when in fakeAsync
+            expect(fixture.debugElement.query(By.css('app-my-thing'))).toBeTruthy();
+        })));
+
+    // test using fakeAsync() and tick(), getting an element inside the component
+    it('has the correct text', fakeAsync(
+        inject([Router], (router: Router) => {
+            router.navigateByUrl('/path/to/module');
+            advance();
+
+            const element = rendered.query(By.css('button'));
+            expect(element).toBeTruthy();
+            expect(element.nativeElement.innerText).toEqual('Click me!');
+        })));
+
+    // using async() and fixture.whenStable() to test further navigation
+    it('navigates using async() and fixture.whenStable()', async(
+        inject([Router, Location], (router: Router, location: SpyLocation) => {
+            // navigate the router-outlet to the initial view we are testing
+            router.navigateByUrl('/path/to/module')
+                .then(() => {
+                    // do the action
+                    const button: HTMLButtonElement = rendered.query(By.css('button')).nativeElement;
+                    button.click();
+                    // return new promise that will resolve when the fixture is stable
+                    return fixture.whenStable();
+                })
+                .then(() => {
+                    // test the location spy we injected
+                    expect(location.path()).toBe('/path/to/module/other');
+                });
+        })));
+
+    // using fakeAsync() and tick() to test further navigation
+    it('navigates again using fakeAsync() and tick()', fakeAsync(
+        inject([Router, Location], (router: Router, location: SpyLocation) => {
+            let spyNavigateByUrl;
+
+            // navigate the router-outlet to the initial view we are testing
+            router.navigateByUrl('/path/to/module');
+            advance();
+
+            // get the spy method (and call through so that the mock router is used)
+            spyNavigateByUrl = spyOn(router, 'navigateByUrl').and.callThrough();
+
+            // do the action
+            const button: HTMLButtonElement = rendered.query(By.css('button')).nativeElement;
+            button.click();
+            advance();
+
+            // test the location spy we injected (two different ways)
+            expect(location.path()).toBe('/path/to/module/other');
+
+            expect(spyNavigateByUrl).toHaveBeenCalledTimes(1);
+            expect(spyNavigateByUrl.calls.first().args[0].toString()).toBe('/path/to/module/other');
+        })));
+
+    // Here we have commonalised the injection and initial navigation into the 
+    // beforeEach()
+    describe('when using a common beforeEach', () => {
+        let router: Router;
+        let location: SpyLocation;
+
+        beforeEach(fakeAsync(
+            inject([Router, Location], (_router: Router, _location: SpyLocation) => {
+                router = _router;
+                location = _location;
+                router.navigateByUrl('/path/to/module/elsewhere/999');
+                advance();
+            })));
+
+        it('is tested', fakeAsync(() => {
+            expect(location.path()).toBe('/path/to/module/elsewhere/999');
+        }));
+
+        it('is tested again', fakeAsync(() => {
+            const element = rendered.query(By.css('button'));
+            expect(element).toBeTruthy();
+            expect(element.nativeElement.innerText).toEqual('Click me!');
+        }));
+    });
+
+    function advance() {
+        tick();
+        fixture.detectChanges();
+    }
+});
+```
+7. Run tests using `ng test` -->
