@@ -39,14 +39,6 @@ A blueprint is not a house.  It's merely a piece of paper that describes how the
 <p></p>
 <codeblock language="language-powershell" title="Output">{{objectSampleErrorOutput1}}</codeblock>
 
-
-<p>
-    So to recap:</p>
-    <ul>
-        <li>A <i>class</i> is a <i>"blueprint"</i></li>
-        <li>An <i>object</i> represents a functional <i>"finished product"</i></li>
-        <li>An <i>object</i> is stored in memory.</li>
-    </ul>
 <p>Let's revisit our analogy.  Let's say I was developing a subdivision and I had a need to build multiple houses.  I want to save time and cost by not having to redesign
     each house, so I decide to build multiple houses with the same blueprint!</p>
     <p>This is important to understand.  In the game example above, we have 1 Zombie class, but we can have hundreds of Zombie objects for our player to shoot.  Each zombie
@@ -57,15 +49,37 @@ A blueprint is not a house.  It's merely a piece of paper that describes how the
     <p></p>
     <codeblock language="language-powershell" title="Output">{{objectSampleOutput2}}</codeblock>
     
+    <p>
+        So to recap:</p>
+        <ul>
+            <li>A <i>class</i> is a <i>"blueprint"</i></li>
+            <li>An <i>object</i> represents a functional <i>"finished product"</i></li>
+            <li>An <i>object</i> is stored in memory.</li>
+            <li>You can make multiple <i>objects</i> from one <i>class</i></li>
+        </ul>
 
-<a href="https://stackoverflow.com/questions/3323330/difference-between-object-and-instance">Difference between a Java
-    object and an instance</a>
-<p></p>
+<p>Now that we have discussed an <i>object</i>, let's discuss what a <i>dependency</i> is.</p>
 
 <h2>What is a dependency?</h2>
-<p>A dependency is a class that is used by another class. It's that simple.</p>
+<p>A <i>dependency</i> is a <i>class</i> that is used by another <i>class</i>. It's that simple.  If <i>class A</i> uses <i>class B</i> anywhere in its code, 
+    then <i>class B</i> is a <i>dependency</i> of <i>class A</i>.
+<p>Let's look at some examples below.
+</p>
 
 <codeblock language="language-java" title="Dependency Example 1 - As Field variable">{{codeExample1}}</codeblock>
 <p></p>
 <codeblock language="language-java" title="Dependency Example 2 - As Local variable">{{codeExample2}}</codeblock>
+<p>Let's revisit the Zombie analogy and see if we can make a "Weapon" <i>dependency class</i>.  Notice that if you want to utilize some behavior of the <i>dependency class</i>
+    then you need an <i>object</i> of that <i>dependency class</i>.</p>
+<codeblock language="language-java" title="Dependency Example 3 - As Local variable">{{codeExample3}}</codeblock>
+<codeblock language="language-powershell" title="Output">{{objectSampleOutput3}}</codeblock>
+
+
+<p>
+    So to recap:</p>
+    <ul>
+        <li>A <i>dependency</i> is a <i>class</i> used in the code of another <i>class</i></li>
+        <li>This is typically done by using an <i>object</i> created by the <i>dependency class</i></li>
+    </ul>
+
 <h2>What is dependency injection?</h2>

@@ -89,6 +89,33 @@ public class GameDie {
   }
 }`
 
+codeExample3 = `class Weapon {
+  public String name;
+  
+  // Setup a constructor so we can set a different name for each Weapon object.
+  public Weapon(String name){
+    this.name = name;
+  }
+}
+
+class Zombie {
+  public int hitPoints = 100;
+  // Weapon is a DEPENDENCY of Zombie.  But notice that we have a Weapon OBJECT "Claws".
+  public Weapon weapon = new Weapon("Claws");
+
+  public void attack(){
+    System.out.println("Zombie attacks with " + weapon.name);
+  }
+}
+  
+public class Program {
+  public static void main {
+    Zombie z = new Zombie();
+    z.attack();
+  }
+}`
+  objectSampleOutput3 = `Zombie attacks with Claws`
+
   constructor() { }
 
   ngOnInit() {
