@@ -1,9 +1,8 @@
 <h1>Dependency Injection</h1>
-<h3><i>Dependency Injection</i>
-    is the technique in which an <i>object</i> receives other <i>objects</i> that it depends on.</h3>
-    <p>Dependency Injection is an extremely important topic.  
-    You will see it being discussed in relation to frameworks and testing.  I highly recommend you thoroughly understand dependency 
-    injection before trying to learn Spring Boot or Angular. This is what you gain by understanding dependency injection:
+<h3><i>Dependency Injection</i> is the technique in which an <i>object</i> receives other <i>objects</i> that it depends
+    on.</h3>
+<p>Dependency Injection is an extremely important topic to understand because it is the foundation for frameworks and testing.
+    This is what you gain by understanding dependency injection:
 </p>
 <ul>
     <li>It's easier to design classes for testing.</li>
@@ -16,20 +15,55 @@
     <li>Dependency</li>
     <li>Injection</li>
 </ul>
-<p>By the end of this lesson, you should be able to understand what dependency injection is from a code standpoint and, you should
-    be able to identify the different techniques used to inject a dependency.  Let's get started!</p>
+<p>By the end of this lesson, you should be able to understand what dependency injection is from a code standpoint and,
+    you should be able to identify the different techniques used to inject a dependency. Let's get started!</p>
 <h2>What is an object?</h2>
-<p>In computer science, an <i>object</i> can be a variable, a data structure, a function, or a method, and as such, is a value in memory referenced by an identifier.
-    In Java and Javascript, an <i>object</i> refers to a particular <i>instance</i> of a class, where the object can be a combination of variables, functions, and data structures.</p>
+<p>In Java and Javascript, an <i>object</i> refers to a particular <i>instance</i> of a <i>class</i>, where the object can be
+    a combination of variables, functions, and data structures.</p>
+<p>To simplify this, let's use a metaphor.  A <i>class</i> is a blueprint for how you want to define the states and behavior of an object.
+A blueprint is not a house.  It's merely a piece of paper that describes how the house should be built.  A <i>class</i> operates in the same manner.</p>
+<p>For us to get a house, we must build it.  You need a construction crew and raw materials.  Once the house is completed, then you can call the finished product
+    a house.  In our analogy this is what's considered the <i>object</i>.  It's a working creation defined by the blueprint (the <i>class</i>).  Fortunately for us, 
+    a computer can instaneously create an object for us, so we don't have to worry about the manual labor!  We still require raw resources, though, and that comes
+    in the form of memory.  An object resides in the memory of the computer and can be called upon within a program to execute a specific task.  For example,
+    if we had a Zombie object in memory for our shooter game, the Zombie object would probably hold important information such as hit points, location, sprite information, 
+    or inventory items.  The game would need to obtain this information to determine how the zombie interacts with the player.
+    </p>
+    <p>Let's look at some code.</p>
 
-<a href="https://stackoverflow.com/questions/3323330/difference-between-object-and-instance">Difference between a Java object and an instance</a>
-<p></p>
 <codeblock language="language-java" title="Example of an object">{{objectSample1}}</codeblock>
 <p></p>
 <codeblock language="language-powershell" title="Output">{{objectSampleOutput1}}</codeblock>
+<p>Now let's look at what happens when you try to call a method from a class and not an object.</p>
+<codeblock language="language-java" title="Calling an instance method from a class">{{objectSampleError1}}</codeblock>
+<p></p>
+<codeblock language="language-powershell" title="Output">{{objectSampleErrorOutput1}}</codeblock>
+
+
+<p>
+    So to recap:</p>
+    <ul>
+        <li>A <i>class</i> is a <i>"blueprint"</i></li>
+        <li>An <i>object</i> represents a functional <i>"finished product"</i></li>
+        <li>An <i>object</i> is stored in memory.</li>
+    </ul>
+<p>Let's revisit our analogy.  Let's say I was developing a subdivision and I had a need to build multiple houses.  I want to save time and cost by not having to redesign
+    each house, so I decide to build multiple houses with the same blueprint!</p>
+    <p>This is important to understand.  In the game example above, we have 1 Zombie class, but we can have hundreds of Zombie objects for our player to shoot.  Each zombie
+        will have information unique to them, such as hit points and location.  All are stored in memory and can be accessed by the game.  Let's look at some code.
+    </p>
+
+    <codeblock language="language-java" title="Example of multiple objects">{{objectSample2}}</codeblock>
+    <p></p>
+    <codeblock language="language-powershell" title="Output">{{objectSampleOutput2}}</codeblock>
+    
+
+<a href="https://stackoverflow.com/questions/3323330/difference-between-object-and-instance">Difference between a Java
+    object and an instance</a>
+<p></p>
 
 <h2>What is a dependency?</h2>
-<p>A dependency is a class that is used by another class.  It's that simple.</p>
+<p>A dependency is a class that is used by another class. It's that simple.</p>
 
 <codeblock language="language-java" title="Dependency Example 1 - As Field variable">{{codeExample1}}</codeblock>
 <p></p>
