@@ -17,6 +17,7 @@ import { ObservablesComponent } from './pages/observables/observables.component'
 import { DemoResolver } from './services/demo-resolver';
 import { EarthquakeComponent } from './pages/earthquake/earthquake.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { DependencyInjectionComponent } from './pages/dependency-injection/dependency-injection.component';
 
 const appRoutes: Routes = [
   {
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   { path: 'home', component: HomeComponent },
+  { path: 'dependency-injection', component: DependencyInjectionComponent},
   { path: 'typescript', component: TypescriptComponent },
   { path: 'router', component: RouterComponent },
   { path: 'component', component: ComponentComponent },
@@ -52,7 +54,8 @@ const appRoutes: Routes = [
     ArticleComponent,
     ResolverComponent,
     ObservablesComponent,
-    EarthquakeComponent
+    EarthquakeComponent,
+    DependencyInjectionComponent
   ],
   imports: [
     BrowserModule,

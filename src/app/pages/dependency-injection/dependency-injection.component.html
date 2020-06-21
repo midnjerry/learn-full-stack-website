@@ -1,0 +1,37 @@
+<h1>Dependency Injection</h1>
+<h3><i>Dependency Injection</i>
+    is the technique in which an <i>object</i> receives other <i>objects</i> that it depends on.</h3>
+    <p>Dependency Injection is an extremely important topic.  
+    You will see it being discussed in relation to frameworks and testing.  I highly recommend you thoroughly understand dependency 
+    injection before trying to learn Spring Boot or Angular. This is what you gain by understanding dependency injection:
+</p>
+<ul>
+    <li>It's easier to design classes for testing.</li>
+    <li>It's easier to learn Spring Boot / Angular.</li>
+    <li>It's easier to debug Spring Boot / Angular issues.</li>
+</ul>
+<p>We are going to learn dependency injection by studying each keyword found within its definition.</p>
+<ul>
+    <li>Object</li>
+    <li>Dependency</li>
+    <li>Injection</li>
+</ul>
+<p>By the end of this lesson, you should be able to understand what dependency injection is from a code standpoint and, you should
+    be able to identify the different techniques used to inject a dependency.  Let's get started!</p>
+<h2>What is an object?</h2>
+<p>In computer science, an <i>object</i> can be a variable, a data structure, a function, or a method, and as such, is a value in memory referenced by an identifier.
+    In Java and Javascript, an <i>object</i> refers to a particular <i>instance</i> of a class, where the object can be a combination of variables, functions, and data structures.</p>
+
+<a href="https://stackoverflow.com/questions/3323330/difference-between-object-and-instance">Difference between a Java object and an instance</a>
+<p></p>
+<codeblock language="language-java" title="Example of an object">{{objectSample1}}</codeblock>
+<p></p>
+<codeblock language="language-powershell" title="Output">{{objectSampleOutput1}}</codeblock>
+
+<h2>What is a dependency?</h2>
+<p>A dependency is a class that is used by another class.  It's that simple.</p>
+
+<codeblock language="language-java" title="Dependency Example 1 - As Field variable">{{codeExample1}}</codeblock>
+<p></p>
+<codeblock language="language-java" title="Dependency Example 2 - As Local variable">{{codeExample2}}</codeblock>
+<h2>What is dependency injection?</h2>
