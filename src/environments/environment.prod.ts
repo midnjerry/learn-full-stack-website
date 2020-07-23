@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  getAllPersonsUrl: "http://learn-full-stack.web.app/api/person"
 };

@@ -18,6 +18,7 @@ import { DemoResolver } from './services/demo-resolver';
 import { EarthquakeComponent } from './pages/earthquake/earthquake.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { DependencyInjectionComponent } from './pages/dependency-injection/dependency-injection.component';
+import { HttpClientComponent } from './pages/http-client/http-client.component';
 
 const appRoutes: Routes = [
   {
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
     resolve: { persons: DemoResolver }
   },
   { path: 'observables', component: ObservablesComponent },
+  { path: 'http-client', component: HttpClientComponent },
   { path: 'earthquake', component: EarthquakeComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -55,7 +57,8 @@ const appRoutes: Routes = [
     ResolverComponent,
     ObservablesComponent,
     EarthquakeComponent,
-    DependencyInjectionComponent
+    DependencyInjectionComponent,
+    HttpClientComponent
   ],
   imports: [
     BrowserModule,

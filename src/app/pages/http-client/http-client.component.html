@@ -1,0 +1,111 @@
+<h1>Http Client Calls</h1>
+<h2>Quick Overview of Terminology</h2>
+<p>Eventually every microservice or UI has to communicate with another service or API.  There are multiple methods for service-to-service communication, but we're going to
+    discuss a very common method: making an HTTP call to a Web API.</p>
+    
+<p>When a service calls another service, the calling service is called a <b>Client</b>.  The destination service is usually referenced as an <b>API (Application Programming Interface)</b></p>
+
+<p>An HTTP API is usually composed of multiple <b>endpoints</b> that are each referenced by a URL.  Here are a few examples of url endpoints:</p>
+<ul>
+    <li>http://www.example.com/cars/4</li>
+    <li>http://localhost/movies</li>
+    <li>http://localhost/submit-data</li>
+</ul>
+
+<p>According to HTTP protocol, an API designer can change the behavior of a specific endpoint based on the Http Action Verb it is being called with.</p>
+
+<p>The most popular HTTP Action Verbs are:</p>
+<ul>
+    <li>OPTIONS</li>
+    <li>GET</li>
+    <li>POST</li>
+    <li>PUT</li>
+    <li>PATCH</li>
+    <li>DELETE</li>
+</ul>
+
+<p>Each endpoint and verb combination will typically respond with data and / or HTTP Response Codes</p>
+
+<p>Typical response codes are:</p>
+<ul>
+    <li>200 - Status OK</li>
+    <li>201 - Created Successfully</li>
+    <li>400 - Bad Request</li>
+    <li>401 - Not Authorized</li>
+    <li>404 - Page Not Found (or Resource Not Found)</li>
+    <li>500 - Internal Server Error</li>
+</ul>
+
+<p>Your service should be able to read and respond to these different responses.  The above topics should be very familiar.  If not, please read through these
+    links:
+</p>
+
+<ul>
+    <li>
+        <a target="_blank" href="http://www.steves-internet-guide.com/http-basics/">Http Basics</a>
+    </li>
+</ul>
+
+<h2>Best Practices</h2>
+<p>First things first.  We need to discuss the difference between two basic testing scenarios.  There are "functional" use-cases then there are "wiring" use-cases.
+A functional use-case is when you have some business rules that have to be implemented.  A wiring use-case is when you have to connect to some sort of interface or
+medium to pass data.  It's important to distinguish between the two in your code!!  Mixing the two use-cases makes writing tests <b>EXTREMELY DIFFICULT!</b>
+</p>
+
+<p>
+    So when you look at the code below, you might be tempted to just copy and paste inside the body of your current code.  This would be a mistake.  Setting up your UI to make an HTTP call should be considered a "WIRING" use-case.
+    You should extract this job specifically to it's own service called a "FooBarClient".  That client is then responsible for the scafolding necessary to connect to the Web API.
+No business logic should be included in it, though!  Let a parent component or service deal with that logic.  This client class should only "worry" about the steps needs to make an HTTP call.
+It should only pass data back and forth and notify the parent of any errors.
+</p>
+
+<h2>Assumptions</h2>
+<p>We are trying to connect to an API that has the following endpoints and defined behavior:</p>
+<ul>
+    <li><i>GET api/person</i> - Returns a list of all people</li>
+    <li><i>POST api/person</i> - Creates a new Person based on data provided</li>
+    <li><i>PUT api/person/1</i> - Updates record of existng Person with id of 1</li>
+</ul>
+<codeblock language="language-ts" title="Assumptions:">{{codeSample0}}</codeblock>
+
+<h2>Implementation Code</h2>
+<p>Let's say the Web API we're calling is housed in a microservice named "person-crud".  Remember, we can choose any sort of arbitrary name for our class.
+    Since the microservice we're calling has a name of "person-crud", we call our class "PersonCrudClient".
+</p>
+<p>
+    In this way we have specifically set the role of our class.  It's a "Client" that communicates with our "person-crud".
+</p>
+<p>
+    First we need to create a new service called PersonCrudClient.
+</p>
+<codeblock language="language-ts" title="Generating person-crud-client from Console">{{commands}}</codeblock>
+
+<p>
+    The following files will be generated:
+</p>
+
+<p>The implementation code is boilerplate code for a service</p>
+
+<codeblock language="language-ts" title="Generated person-crud-client.service.ts">{{generatedCode}}</codeblock>
+
+<p>The test code imports the PersonCrudClientService so it can be tested.  The TestBed is also initialized.</p>
+
+<codeblock language="language-ts" title="Generated person-crud-client.service.spec.ts">{{generatedTestCode}}</codeblock>
+
+<h2>First Test and Endpoint</h2>
+<p>The first endpoint we would like to call is: <i>GET api/person</i>.  Calling this endpoint should return an array of Person JSON objects.  The PersonCrudClientService 
+should:</p>
+<ol>
+<li>Determine the URL endpoint to contact</li>
+<li>Initialize the appropriate Angular library: HttpClient</li>
+<li>Make the HTTP request</li>
+<li>Retrieve the response from the HTTP endpoint</li>
+<li>Convert any JSON into TypeScript objects for easy consumption</li>
+</ol>
+<p>We can write a test that indirectly checks for all of this by verifying if a specific url has been called.  We do this by creating a mock server that the implementation
+    calls.  The mock server will only respond if the appropriate HTTP verb and url is called.  The test then checks that the correct response is gathered.
+</p>
+<codeblock language="language-ts" title="First Test">{{codeTest1}}</codeblock>
+
+
+<h2>Tests</h2>
