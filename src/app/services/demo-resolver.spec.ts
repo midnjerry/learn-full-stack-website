@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { DemoResolverService } from './demo-resolver';
+import { DemoResolver } from "./demo-resolver";
 
-describe('DemoResolverService', () => {
+describe("DemoResolver", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
-    const service: DemoResolverService = TestBed.get(DemoResolverService);
+  it("should be created", () => {
+    const service: DemoResolver = TestBed.get(DemoResolver);
     expect(service).toBeTruthy();
   });
 });
