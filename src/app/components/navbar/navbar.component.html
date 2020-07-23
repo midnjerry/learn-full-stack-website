@@ -16,6 +16,7 @@
         routerLink="{{ route.path }}"
         [routerLinkActiveOptions]="{ exact: true }"
         routerLinkActive="active"
+        (click)="onRouteClick()"
         class="nav-link"
         >{{ route.name }}</a
       >
