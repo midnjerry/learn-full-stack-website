@@ -28,6 +28,10 @@ export class NavbarComponent implements OnInit {
   }
 
   onRouteClick() {
+    this.closeMenu();
+  }
+
+  closeMenu() {
     this.dropdownClass.show = false;
     this.buttonClass.active = false;
   }
@@ -36,8 +40,7 @@ export class NavbarComponent implements OnInit {
   onOutsideClick(event: Event) {
     event.stopPropagation();
     if (!this._el.nativeElement.contains(event.target)) {
-      this.dropdownClass.show = false;
-      this.buttonClass.active = false;
+      this.closeMenu();
     } else {
       return;
     }
