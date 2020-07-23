@@ -8,8 +8,10 @@
     /></a>
 
     <div class="dropdown">
-      <button><i class="fas fa-bars"></i></button>
-      <div class="dropdown-content show">
+      <button (click)="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div id="dropdown-content" [ngClass]="dropdownClass">
         <a
           *ngFor="let route of routes"
           routerLink="{{ route.path }}"
