@@ -32,6 +32,7 @@ export class NavbarComponent implements OnInit {
     event.stopPropagation();
     if (!this._el.nativeElement.contains(event.target)) {
       this.dropdownClass.show = false;
+      this.buttonClass.active = false;
     } else {
       return;
     }
