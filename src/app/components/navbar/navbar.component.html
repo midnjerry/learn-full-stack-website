@@ -1,18 +1,22 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<nav class="navbar">
-  <div class="container">
-    <a class="nav-link" routerLink="/"><img class="nav-item" alt="Crusdaer Games Logo"
-        src="assets/images/crusaderGamesLogo.png"></a>
+<header>
+  <nav>
+    <a class="branding" routerLink="/"
+      ><img
+        id="crusader-logo"
+        alt="Crusader Games Logo"
+        src="assets/images/crusaderGamesLogo.png"
+    /></a>
 
-    <a class="nav-link" routerLink="/home">Home</a>
-    <a class="nav-link" routerLink="/dependency-injection">Dependency Injection</a>
-    <a class="nav-link" routerLink="/typescript">Typescript</a>
-    <a class="nav-link" routerLink="/router">Router</a>
-    <a class="nav-link" routerLink="/component">Components</a>
-    <a class="nav-link" routerLink="/resolver">Resolver</a>
-    <a class="nav-link" routerLink="/observables">Observables</a>
-    <a class="nav-link" routerLink="/http-client">Http Requests</a>
-    <a class="nav-link" routerLink="/earthquake">Earthquake</a>
-    <a class="nav-link" routerLink="/angular">Angular</a>
-  </div>
-</nav>
+    <button id="dropdown-btn" [ngClass]="buttonClass" (click)="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div id="dropdown-content" [ngClass]="dropdownClass">
+      <a
+        *ngFor="let route of routes"
+        routerLink="{{ route.path }}"
+        class="nav-link"
+        >{{ route.name }}</a
+      >
+    </div>
+  </nav>
+</header>
