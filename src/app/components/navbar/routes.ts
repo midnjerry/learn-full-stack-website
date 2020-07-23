@@ -7,5 +7,4 @@ export const routes: Route[] = [
   { path: "/component", name: "Components" },
   { path: "/observables", name: "Observables" },
   { path: "/earthquake", name: "Earthquake" },
-  { path: "/angular", name: "Angular" },
 ];
