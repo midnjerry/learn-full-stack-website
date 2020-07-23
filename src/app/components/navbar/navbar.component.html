@@ -7,7 +7,7 @@
         src="assets/images/crusaderGamesLogo.png"
     /></a>
 
-    <button id="dropdown-btn" (click)="toggleMenu()">
+    <button id="dropdown-btn" [ngClass]="buttonClass" (click)="toggleMenu()">
       <i class="fas fa-bars"></i>
     </button>
     <div id="dropdown-content" [ngClass]="dropdownClass">
