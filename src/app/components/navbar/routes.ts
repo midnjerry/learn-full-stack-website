@@ -1,7 +1,7 @@
 import Route from "src/app/models/route";
 
 export const routes: Route[] = [
-  { path: "/", name: "Home" },
+  { path: "/http-client", name: "HttpClient" },
   { path: "/typescript", name: "Typescript" },
   { path: "/router", name: "Router" },
   { path: "/component", name: "Components" },
