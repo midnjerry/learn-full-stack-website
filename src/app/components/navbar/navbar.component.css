@@ -14,8 +14,12 @@ nav {
   background-color: inherit;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
-  width: 80%;
+  padding: 1rem 5rem;
+  position: relative;
+  width: 100%;
 }
 
 .branding {
@@ -36,15 +40,8 @@ nav {
   background-color: #1a5496;
 }
 
-.dropdown {
-  display: flex;
-  flex-direction: row;
-  background-color: inherit;
-  position: relative;
-}
-
-.dropdown > button {
-  margin: auto;
+#dropdown-btn {
+  margin-left: auto;
 }
 
 #dropdown-content {
@@ -59,4 +56,17 @@ nav {
   top: 100%;
   right: 0;
   width: 300px;
+}
+
+@media screen and (max-width: 600px) {
+  #dropdown-content.show {
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 100vw;
+  }
 }
