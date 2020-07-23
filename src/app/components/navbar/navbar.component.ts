@@ -27,6 +27,11 @@ export class NavbarComponent implements OnInit {
     this.buttonClass.active = this.dropdownClass.show ? true : false;
   }
 
+  onRouteClick() {
+    this.dropdownClass.show = false;
+    this.buttonClass.active = false;
+  }
+
   @HostListener("window:click", ["$event"])
   onOutsideClick(event: Event) {
     event.stopPropagation();
