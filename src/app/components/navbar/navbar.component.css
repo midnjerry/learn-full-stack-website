@@ -41,7 +41,25 @@ nav {
 }
 
 #dropdown-btn {
+  background-color: inherit;
+  border: none;
+  border: solid 1px inherit;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 1.2rem;
   margin-left: auto;
+  padding: 0.75rem;
+}
+
+#dropdown-btn.active {
+  background-color: #1a5496;
+  border: solid 1px #1a5496;
+  border-radius: 3px;
+}
+
+#dropdown-btn:hover {
+  background-color: #1a5496;
+  cursor: pointer;
 }
 
 #dropdown-content {
