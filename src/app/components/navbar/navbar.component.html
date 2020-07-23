@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar">
+  <nav>
     <a class="branding" routerLink="/"
       ><img
         id="crusader-logo"
@@ -7,18 +7,16 @@
         src="assets/images/crusaderGamesLogo.png"
     /></a>
 
-    <div class="dropdown">
-      <button (click)="toggleMenu()">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div id="dropdown-content" [ngClass]="dropdownClass">
-        <a
-          *ngFor="let route of routes"
-          routerLink="{{ route.path }}"
-          class="nav-link"
-          >{{ route.name }}</a
-        >
-      </div>
+    <button id="dropdown-btn" (click)="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div id="dropdown-content" [ngClass]="dropdownClass">
+      <a
+        *ngFor="let route of routes"
+        routerLink="{{ route.path }}"
+        class="nav-link"
+        >{{ route.name }}</a
+      >
     </div>
   </nav>
 </header>
