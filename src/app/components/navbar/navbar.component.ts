@@ -41,8 +41,6 @@ export class NavbarComponent implements OnInit {
     event.stopPropagation();
     if (!this._el.nativeElement.contains(event.target)) {
       this.closeMenu();
-    } else {
-      return;
     }
   }
 }
